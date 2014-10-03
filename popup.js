@@ -1,23 +1,43 @@
 var background = chrome.extension.getBackgroundPage();
 
-//Listen to whether if we want the extension to be activated or not
+
 function changeHandler(){
-    if(showAlert.checked){
-        background.activate=1;
-    }
-    else{
-        background.activate=0;
-        //TODO: Should also un-mute all the background tabs
-    }
+
+chrome.bookmarks.create({'parentId': bookmarkNode.id,
+                               'title': 'Extension bookmarks'},
+                                                         function(newFolder) {
+                                                                 console.log("added folder: " + newFolder.title);
+                                                                   });
+      
+    
+    
+    /*    var formTabs = new Array();
+    chrome.tabs.query({},function (tabs){
+        for(var i=0;i<tabs.length;i++){
+            formTabs[i]=tabs[i];
+        }
+        for(var i=0;i<formTabs.length;i++){
+            if(formTabs[i]!=null)
+                //background.console.log(formTabs[i].url);
+                addBookmark(formTabs[i]);
+            else
+                background.console.log("??" + i);
+        }
+    });
+*/
+
 }
+function addBookmark(input){
+    if(!input.title || !input.url)
+        return;
 
 
+
+    background.console.log(input.title);
+    background.console.log(input.url);
+}
 
 //Add a listener to know when the tool is disabled/enabled
 document.getElementById("showAlert").addEventListener('change', changeHandler);
-//Add a listener to know when the tab is changed
-chrome.tabs.onActivated.addListener(function(activeInfo) {
-      // how to fetch tab url using activeInfo.tabid
-    alert("HI");     
-    console.log("does this work");
-}); 
+
+

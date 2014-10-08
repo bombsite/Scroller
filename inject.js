@@ -23,7 +23,11 @@ $( document ).ready(function() {
         chrome.storage.local.get('value',function(result){
             console.log('init'+result.value);
         });
-/* This code is unnecessary since the value is set to 0 by default
+
+
+        chrome.extension.sendMessage({ type: "FROM_PAGE", text: "Hello from the webpage!" });
+
+        /* This code is unnecessary since the value is set to 0 by default
         chrome.storage.local.set({'value': 0}, function() {
            // Notify that we saved.
             console.log('value set to 0');

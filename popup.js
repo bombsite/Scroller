@@ -1,13 +1,13 @@
 var background = chrome.extension.getBackgroundPage();
 
 
-function changeHandler(){
 
+
+
+var port = chrome.extension.connect({
+        name: "Sample Communication"
 });
-      
-    
-
-//Add a listener to know when the tool is disabled/enabled
-document.getElementById("showAlert").addEventListener('change', changeHandler);
-
-
+port.postMessage("Hi BackGround");
+port.onMessage.addListener(function(msg) {
+        console.log("message recieved" + msg);
+});

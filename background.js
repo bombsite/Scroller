@@ -1,3 +1,7 @@
+//TODO: save the number of scrolls here.
+//      when the onConnect listener triggers,
+//      send that saved value over.
+
 chrome.extension.onConnect.addListener(function(port) {
     port.onMessage.addListener(function(content) {
                     console.log("Connected ..." + content);
